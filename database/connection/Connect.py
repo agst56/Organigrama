@@ -24,6 +24,13 @@ class Connect:
         cursor.close()
         return [dict(row) for row in results]
 
+    def execute_update(self, query, params=None):
+        cursor = self.connection.cursor()
+        cursor.execute(query, params)
+        self.connection.commit()
+        cursor.close()
+
+
     def close(self):
         self.connection.close()
 
@@ -32,3 +39,12 @@ class Connect:
         result = self.execute_query(query, params)
         self.close()
         return result
+    def update_data(self, query, params=None):
+        self.connect()
+        try:
+            self.execute_update(query, params)
+            self.close()
+            return True 
+        except Exception as e:
+            self.close()
+            return False  

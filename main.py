@@ -8,4 +8,4 @@ ConstruirOrganigrama.imprimirOrganigrama(organigrama)
 app = OrganigramaGrafico(organigrama)
 app.mainloop()
 
-
+  

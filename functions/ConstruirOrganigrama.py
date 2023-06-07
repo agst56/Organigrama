@@ -20,5 +20,8 @@ def imprimirOrganigrama(nodo: OrganigramaNodo):
     print(nodo.dep.NOM)
     for nodoSuc in nodo.listDep:
         imprimirOrganigrama(nodoSuc)
-    
+
+
+
+
     
