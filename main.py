@@ -7,5 +7,5 @@ organigrama = ConstruirOrganigrama.construir("ABC")
 ConstruirOrganigrama.imprimirOrganigrama(organigrama)
 app = OrganigramaGrafico(organigrama)
 app.mainloop()
-
-  
+# ConstruirOrganigrama.crearOrganigrama("primerOrganigrama")
+ 

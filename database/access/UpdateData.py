@@ -37,9 +37,36 @@ def insertOrganigrama(org:Organigrama):
     params = (org.COD_ORG, org.ORG, org.FEC)
     db.update_data(insert, params)
 
-def insertDependencia(dep:Dependencia):
-    insert = '''INSERT INTO dependencias(cod_dep, nom, codres, cod_org, pos_x, pos_y) 
-    VALUES (%s, %s,%s,%s,%s,%s)'''
+def insertOrgDep(cod_org:str, cod_dep_mayor:str):
+    insert = '''INSERT INTO orgdep(cod_org, dep_mayor) VALUES(%s,%s)'''
+    params = (cod_org, cod_dep_mayor)
+    db.update_data(insert, params)
 
-def crearOrganigrama(org:Organigrama, depMayor:Dependencia):
-    pass
+def insertDependencia(dep:Dependencia):
+    insert = '''INSERT INTO dependencias(cod_dep, nom, cod_org, pos_x, pos_y) 
+    VALUES (%s, %s,%s,%s,%s)'''
+    params = (dep.COD_DEP, dep.NOM, dep.COD_ORG, dep.posX, dep.posY)
+    db.update_data(insert, params)
+
+def insertDepDep(dep_ant:str, dep_suc:str):
+    insert = "INSERT INTO depdep(dep_ant, dep_suc) VALUES(%s,%s)"
+    params = (dep_ant, dep_suc)
+    db.update_data(insert, params)
+
+def insertPersona(persona:Persona):
+    insert = '''INSERT INTO personas(cod_per, nom, ape, tel, dir, dep, sal)
+    VALUES(%s,%s,%s,%s,%s,%s,%s)'''
+    params = (persona.COD_PER, persona.NOM, persona.APE, persona.TEL, persona.DIR, persona.DEP, persona.SAL)
+    db.update_data(insert, params)
+
+def updateDepDep(dep_ant, dep_suc):
+    print("Updating depdep with dep_ant="+dep_ant+"and dep_suc="+dep_suc)
+    update = "UPDATE depdep SET dep_ant=%s WHERE dep_suc=%s"
+    params = (dep_ant, dep_suc)
+    db.update_data(update, params)
+
+def eliminarDep(cod_dep):
+    print("eliminando dep con cod_dep: "+ cod_dep)
+    delete = "DELETE FROM dependencias WHERE cod_dep=%s"
+    params=(cod_dep,)
+    db.update_data(delete, params)
