@@ -35,17 +35,12 @@ class FrameBotonOrganigramas(ctk.CTkFrame):
         ...
 
 
-def CrearArchivo_Organigrama():
-    try:
-        with open('organigrama.txt', 'w') as f:
-            f.close()
-    except IOError:
-        print("Error al crear el archivo")
-
 
 def Agregar_Organigramas():
     ventana_organigrama = ctk.CTkInputDialog(text="Ingrese el nombre de su Organigrama", title=" ORGANIPLANNER ")
     nom = ventana_organigrama.get_input()
+    if nom=="" or nom==None:
+        return
     cod_org = ConstruirOrganigrama.crearOrganigrama(nom)
     graficarOrganigrama(cod_org)
 

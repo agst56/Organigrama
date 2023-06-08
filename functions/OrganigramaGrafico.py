@@ -136,7 +136,6 @@ class OrganigramaGrafico(ctk.CTk):
             self.canvas.tag_bind(lineaIn, "<ButtonRelease-3>", lambda event: self.linea_release(orgNodo, nodoAnt))
             
         lineasOut = []
-
         for nodoSuc in orgNodo.listDep:
             lineaOut = self.canvas.create_line(orgNodo.dep.posX, orgNodo.dep.posY, orgNodo.dep.posX, orgNodo.dep.posY, fill="black", width=5)
             lineasOut.append(lineaOut)
@@ -183,6 +182,7 @@ class Opciones(ctk.CTkFrame):
         cod_dep = choice(forId)+choice(forId)+choice(forId)+choice(forId)
         dep = Dependencia(cod_dep, "", None, nodoAnt.dep.posX, nodoAnt.dep.posY+150, nodoAnt.dep.COD_ORG)
         orgNodo = OrganigramaNodo(dep)
+        orgNodo.setListDep([])
         master.dep_nuevos.append(dep)
         master.depdep_nuevos[cod_dep] = nodoAnt.dep.COD_DEP
         nodoAnt.listDep.append(orgNodo)
@@ -194,6 +194,9 @@ class Opciones(ctk.CTkFrame):
             if orgNodo.dep.COD_DEP == nodo.dep.COD_DEP:
                 break
             pos+=1
+        print("eliminando del grafico cod_dep = "+orgNodo.dep.COD_DEP, " nom="+orgNodo.dep.NOM)
+        print(nodo.dep.COD_DEP for nodo in nodoAnt.listDep)
         del nodoAnt.listDep[pos]
+        print(nodo.dep.COD_DEP for nodo in nodoAnt.listDep)
         master.dep_deleted.append(orgNodo.dep.COD_DEP)
         master.iniciar()
